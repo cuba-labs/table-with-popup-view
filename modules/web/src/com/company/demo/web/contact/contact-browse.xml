@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="com.company.demo.web.contact.ContactBrowse"
+        focusComponent="contactsTable"
+        lookupComponent="contactsTable"
+        messagesPack="com.company.demo.web.contact">
+    <dsContext>
+        <collectionDatasource id="contactsDs"
+                              class="com.company.demo.entity.Contact"
+                              view="contact-with-phones">
+            <query>
+                <![CDATA[select e from demo$Contact e]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="contactsTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="contactsTable"
+                datasource="contactsDs">
+            <properties include=".*"/>
+        </filter>
+        <table id="contactsTable"
+               width="100%">
+            <actions>
+                <action id="create"/>
+                <action id="edit"/>
+                <action id="remove"/>
+            </actions>
+            <columns>
+                <column id="name"/>
+                <column id="phones"/>
+            </columns>
+            <rows datasource="contactsDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="contactsTable.create"/>
+                <button id="editBtn"
+                        action="contactsTable.edit"/>
+                <button id="removeBtn"
+                        action="contactsTable.remove"/>
+            </buttonsPanel>
+        </table>
+    </layout>
+</window>
